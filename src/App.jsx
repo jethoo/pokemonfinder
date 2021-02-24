@@ -10,7 +10,7 @@ const App = () => {
     const [ check, setCheck ] = useState(false)
     const [ firstFilter, setfirstFilter ] = useState([])
     const [ secondFilter, setsecondFilter ] = useState([])
-    const [ userEntered, setuserEntered ] = useState([])
+    const [ userEntered, setuserEntered ] = useState('')
     //variables
     
     useEffect(() => {
@@ -55,9 +55,11 @@ const App = () => {
         let userInput = (event.target.value).toLowerCase()
         //setting the state of user input
         setuserEntered(userInput)
-
+        console.log(userInput.length)
+       
         //filtering when user inputs character
-        let filteredObjects = fetchedResult.filter(item => item.Types[1] !== undefined ? (item.Types[0].toLowerCase().includes(userInput) || item.Types[1].toLowerCase().includes(userInput) || item.Name.toLowerCase().includes(userInput)) : (item.Types[0].toLowerCase().includes(userInput) || item.Name.toLowerCase().includes(userInput)))
+        let filteredObjects =  fetchedResult.filter(item => item.Types[1] !== undefined ? (item.Types[0].toLowerCase().includes(userInput) || item.Types[1].toLowerCase().includes(userInput) || item.Name.toLowerCase().includes(userInput)) : (item.Types[0].toLowerCase().includes(userInput) || item.Name.toLowerCase().includes(userInput))) 
+        
         setfirstFilter(filteredObjects)
 
         //reducing search results to 4
@@ -70,6 +72,7 @@ const App = () => {
             sortedByNameorType = filteredFour.sort(compareName) :
             sortedByNameorType = filteredFour.sort(compareTypes)
         })
+
         //set the state with four results
         setsecondFilter(sortedByNameorType);
     }
@@ -82,7 +85,7 @@ const App = () => {
                     Maximum Combat Points
                 </small>
             </label>
-            <input type="text" className="input" placeholder="Pokemon or type" onChange={findMatch}/>
+            <input type="text" className="input" placeholder="Type your text here" onChange={findMatch}/>
             <SearchView check={check} firstFiltered={firstFilter} secondFiltered={secondFilter} userInput={userEntered}/>
         </>
     )

@@ -17,7 +17,9 @@ import React from 'react'
 
 const SearchView = ({ check, firstFiltered, secondFiltered, userInput }) => {
     //variable
+    
     let finalFiltered
+  
     if(firstFiltered.length === 0 ){
         finalFiltered = 0
     }else if( secondFiltered === undefined){
@@ -26,11 +28,11 @@ const SearchView = ({ check, firstFiltered, secondFiltered, userInput }) => {
         finalFiltered = check ? firstFiltered.slice(0,4).sort(compareCP) : secondFiltered
     }
     const regex = new RegExp(userInput, 'gi')
-    
+   
     return (
        <>
         {finalFiltered === 0 ? <div className="loader"></div> : ''}
-        {finalFiltered.length > 0 ? 
+        { finalFiltered.length > 0 ? 
           <ul className="suggestions">
                 {finalFiltered.map(item => {
                 return (
