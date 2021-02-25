@@ -31,10 +31,10 @@ const SearchView = ({ check, firstFiltered, secondFiltered, userInput }) => {
    
     return (
        <>
-        {finalFiltered === 0 ? <div className="loader"></div> : ''}
-        { finalFiltered.length > 0 ? 
+        {}
+        { userInput.length > 0 ? 
           <ul className="suggestions">
-                {finalFiltered.map(item => {
+                {finalFiltered.length > 0 ? finalFiltered.map(item => {
                 return (
                     <li key={item.Number}>
                         <img
@@ -48,7 +48,17 @@ const SearchView = ({ check, firstFiltered, secondFiltered, userInput }) => {
                         </div>
                     </li>
                 )
-            })
+            }) : 
+            <ul className="suggestions">
+              <li>
+                <img src="https://cyndiquil721.files.wordpress.com/2014/02/missingno.png" alt="" />
+                <div className="info">
+                    <h1 className="no-results">
+                        No results
+                    </h1>
+                </div>
+            </li>
+        </ul>
         }
           </ul> 
         : 
